@@ -1,0 +1,116 @@
+baseURL = "https://circologoisticopadovano.github.io/"
+title = "Circolo Goistico Padovano"
+theme = "PaperMod"
+
+defaultContentLanguage = "it"
+defaultContentLanguageInSubdir = true
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+# Numero di elementi per pagina negli elenchi (es. News)
+[pagination]
+  pagerSize = 10
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true        # consente HTML inline nei file Markdown (es. mappe)
+
+# Parametri condivisi tra tutte le lingue
+[params]
+  env = "production"
+  author = "Circolo Goistico Padovano"
+  defaultTheme = "auto"     # chiaro/scuro in base alle preferenze del sistema
+  displayFullLangName = true  # mostra "Italiano / English" nello switcher
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = false
+  ShowToc = true
+  TocOpen = false
+
+  # Pulsanti social opzionali in home (rimuovi/aggiungi a piacere)
+  [[params.socialIcons]]
+    name = "telegram"
+    url = "https://t.me/+aqclA6LwvHtlNGQ0"
+
+# =====================  LINGUE  =====================
+
+[languages]
+
+  # ---------- Italiano (predefinita) ----------
+  [languages.it]
+    languageCode = "it-it"
+    languageName = "Italiano"
+    title = "Circolo Goistico Padovano"
+    weight = 1
+
+    [languages.it.params]
+      description = "Circolo Goistico Padovano — il club del gioco del Go a Padova"
+      [languages.it.params.homeInfoParams]
+        Title = "Circolo Goistico Padovano ⚫⚪"
+        Content = "Il club del **gioco del Go** a Padova. Ci ritroviamo per giocare, imparare e diffondere questo antico gioco di strategia. Principianti benvenuti!"
+
+    [languages.it.menu]
+      [[languages.it.menu.main]]
+        identifier = "chi-siamo"
+        name = "Chi siamo"
+        url = "/chi-siamo/"
+        weight = 10
+      [[languages.it.menu.main]]
+        identifier = "news"
+        name = "News & Eventi"
+        url = "/news/"
+        weight = 20
+      [[languages.it.menu.main]]
+        identifier = "come-giocare"
+        name = "Come giocare a Go"
+        url = "/come-giocare/"
+        weight = 30
+      [[languages.it.menu.main]]
+        identifier = "contatti"
+        name = "Contatti"
+        url = "/contatti/"
+        weight = 40
+
+  # ---------- English ----------
+  [languages.en]
+    languageCode = "en-us"
+    languageName = "English"
+    title = "Circolo Goistico Padovano"
+    weight = 2
+
+    [languages.en.params]
+      description = "Circolo Goistico Padovano — the home of the game of Go in Padua, Italy"
+      [languages.en.params.homeInfoParams]
+        Title = "Circolo Goistico Padovano ⚫⚪"
+        Content = "The home of the **game of Go** in Padua. We meet to play, learn and share this ancient game of strategy. Beginners welcome!"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about/"
+        weight = 10
+      [[languages.en.menu.main]]
+        identifier = "news"
+        name = "News & Events"
+        url = "/news/"
+        weight = 20
+      [[languages.en.menu.main]]
+        identifier = "how-to-play"
+        name = "How to play Go"
+        url = "/how-to-play/"
+        weight = 30
+      [[languages.en.menu.main]]
+        identifier = "contact"
+        name = "Contact"
+        url = "/contact/"
+        weight = 40

@@ -1,0 +1,284 @@
+/* =========================================================================
+   Circolo Goistico Padovano — identità visiva "Goban / Legno"
+   Override additivo del tema PaperMod (nessuna modifica al tema).
+   Toni caldi del legno di kaya, motivo a griglia della scacchiera,
+   accenti tabacco, dettagli a "pietra". Deciso ma elegante.
+   ========================================================================= */
+
+/* ----------------------------- a) Palette ------------------------------- */
+
+:root {
+    --heading-font: "Fraunces", Georgia, "Times New Roman", serif;
+
+    /* Legno / carta (chiaro) */
+    --theme: #f4ecda;
+    --entry: #fbf7ee;
+    --primary: #2b2118;
+    --secondary: #7a6a55;
+    --tertiary: #d8c39a;
+    --content: #3a2f24;
+    --border: #e0d0aa;
+
+    --accent: #8a5a2b;
+    --accent-strong: #6f4720;
+    --goban-line: rgba(120, 90, 50, .16);
+    --stone-black: #2b2118;
+    --card-shadow: 0 1px 2px rgba(60, 40, 15, .06), 0 6px 18px rgba(60, 40, 15, .07);
+    --card-shadow-hover: 0 2px 4px rgba(60, 40, 15, .08), 0 14px 30px rgba(60, 40, 15, .14);
+}
+
+:root[data-theme="dark"] {
+    /* Lacca notturna (scuro) */
+    --theme: #1c1814;
+    --entry: #262019;
+    --primary: #ece3d2;
+    --secondary: #a3927a;
+    --tertiary: #3a322a;
+    --content: #d8ccb8;
+    --border: #3a322a;
+
+    --accent: #caa46a;
+    --accent-strong: #ddbd8a;
+    --goban-line: rgba(200, 164, 106, .14);
+    --stone-black: #0e0b08;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, .25), 0 6px 18px rgba(0, 0, 0, .30);
+    --card-shadow-hover: 0 2px 4px rgba(0, 0, 0, .30), 0 14px 30px rgba(0, 0, 0, .45);
+}
+
+/* Il tema lega lo sfondo "lista" a --code-bg: lo riallineiamo al legno. */
+.list {
+    background: var(--theme);
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--entry);
+}
+
+body {
+    background: var(--theme);
+}
+
+/* ---------------------------- b) Tipografia ----------------------------- */
+
+h1, h2, h3, h4,
+.entry-header h2,
+.post-title,
+.page-header h1,
+.first-entry .entry-header h1,
+.home-info .entry-header h1 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.post-title,
+.page-header h1 {
+    font-weight: 700;
+}
+
+/* Righello accento sotto gli h2 del contenuto: dà ritmo alle sezioni */
+.post-content h2,
+.post-single .post-content h2 {
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+}
+
+.post-content h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--accent);
+}
+
+/* ------------------------------ c) Header ------------------------------- */
+
+.header {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--theme) 88%, transparent);
+}
+
+.nav .logo a {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+#menu a {
+    transition: color .15s ease;
+}
+
+#menu a:hover {
+    color: var(--accent);
+}
+
+#menu .active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+
+/* ---------------------- d) Hero (home-info / goban) --------------------- */
+
+.first-entry.home-info {
+    position: relative;
+    overflow: hidden;
+    min-height: auto;
+    padding: 2.4rem 2.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--entry);
+    /* Motivo goban: griglia tenue */
+    background-image:
+        repeating-linear-gradient(0deg, var(--goban-line) 0 1px, transparent 1px 44px),
+        repeating-linear-gradient(90deg, var(--goban-line) 0 1px, transparent 1px 44px);
+    background-position: -1px -1px;
+    box-shadow: var(--card-shadow);
+}
+
+.first-entry.home-info .entry-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: .4rem;
+}
+
+/* Punti hoshi negli incroci della griglia */
+.first-entry.home-info::before,
+.first-entry.home-info::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .55;
+    pointer-events: none;
+}
+
+.first-entry.home-info::before {
+    top: calc(44px - 3.5px - 1px);
+    left: calc(44px - 3.5px - 1px);
+    box-shadow:
+        176px 0 0 var(--accent),
+        0 176px 0 var(--accent);
+}
+
+.first-entry.home-info::after {
+    top: calc(44px - 3.5px - 1px);
+    right: calc(44px - 3.5px - 1px);
+}
+
+/* -------------- e) Elenchi: marker "hoshi" (punto goban) ---------------- */
+/* Vale su tutte le pagine (home, singole, liste): si aggancia al contenuto
+   .md-content, non alla classe del body. Solo gli elenchi non ordinati;
+   gli elenchi numerati (ol) restano invariati. */
+
+.post-content.md-content ul,
+.entry-content.md-content ul {
+    list-style: none;
+    padding-left: 1.35rem;
+}
+
+.post-content.md-content ul li,
+.entry-content.md-content ul li {
+    position: relative;
+}
+
+/* Non toccare gli elenchi annidati con checkbox (task list) */
+.post-content.md-content ul li::before,
+.entry-content.md-content ul li::before {
+    content: "";
+    position: absolute;
+    left: -1.35rem;
+    top: 0.8em;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    /* Punto hoshi in colore accento: coerente con i punti dell'hero */
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* --------------------------- f) Card News ------------------------------- */
+
+.post-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.post-entry:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent);
+}
+
+.post-entry .entry-header h2 {
+    color: var(--primary);
+}
+
+.post-entry:hover .entry-header h2 {
+    color: var(--accent-strong);
+}
+
+.post-entry .entry-footer,
+.post-meta {
+    color: var(--secondary);
+}
+
+/* ------------------------------- g) Link -------------------------------- */
+
+.post-content a,
+.entry-content a,
+.first-entry.home-info a {
+    color: var(--accent);
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    text-underline-offset: 3px;
+    transition: color .15s ease, text-decoration-color .15s ease;
+}
+
+.post-content a:hover,
+.entry-content a:hover,
+.first-entry.home-info a:hover {
+    color: var(--accent-strong);
+    text-decoration-color: var(--accent-strong);
+}
+
+/* ------------------------------ h) Footer ------------------------------- */
+
+.footer {
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+    margin-top: var(--gap);
+}
+
+.footer a {
+    color: var(--accent);
+}
+
+.footer a:hover {
+    color: var(--accent-strong);
+}
+
+/* Social icons (es. Telegram in home) */
+.social-icons a:hover svg {
+    color: var(--accent);
+}
+
+/* ------------------------------ Responsive ------------------------------ */
+
+@media (max-width: 600px) {
+    .first-entry.home-info {
+        padding: 1.8rem 1.4rem;
+    }
+
+    .first-entry.home-info .entry-header h1 {
+        font-size: 1.9rem;
+    }
+}

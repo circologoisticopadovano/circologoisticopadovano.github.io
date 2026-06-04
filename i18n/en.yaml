@@ -1,0 +1,12 @@
+# Project strings (merged with the PaperMod theme strings).
+# Used by the "preiscritti" shortcode.
+preiscritti_loading:
+  other: "Loading the list…"
+preiscritti_unavailable:
+  other: "List not available yet."
+preiscritti_empty:
+  other: "No pre-registrations yet."
+preiscritti_count:
+  other: "pre-registered"
+preiscritti_error:
+  other: "Unable to load the list right now. Please try again later."

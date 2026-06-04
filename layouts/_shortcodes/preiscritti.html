@@ -1,0 +1,145 @@
+{{- /*
+  Shortcode "preiscritti": legge un CSV pubblicato da Google Sheets e disegna
+  una tabella dei pre-iscritti, in stile col tema PaperMod.
+
+  Uso:
+    {{< preiscritti csv="https://docs.google.com/.../pub?...&output=csv" >}}
+    {{< preiscritti csv="..." columns="Nome,Club,Rank,Turni" >}}
+
+  Il foglio pubblicato dovrebbe esporre SOLO le colonne pubbliche (no email/tel).
+*/ -}}
+{{- $csv := .Get "csv" -}}
+{{- $columns := .Get "columns" | default "Nome,Club,Rank,Turni" -}}
+{{- $id := printf "preiscritti-%d" .Ordinal -}}
+
+<div class="preiscritti" id="{{ $id }}" data-csv="{{ $csv }}" data-columns="{{ $columns }}"
+     data-msg-unavailable="{{ i18n "preiscritti_unavailable" }}"
+     data-msg-empty="{{ i18n "preiscritti_empty" }}"
+     data-msg-count="{{ i18n "preiscritti_count" }}"
+     data-msg-error="{{ i18n "preiscritti_error" }}">
+  <p class="preiscritti__status">{{ i18n "preiscritti_loading" }}</p>
+</div>
+
+<style>
+  .preiscritti { margin: 1.5rem 0; overflow-x: auto; }
+  .preiscritti__status { color: var(--secondary); font-style: italic; }
+  .preiscritti table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .preiscritti th,
+  .preiscritti td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .preiscritti th { color: var(--primary); font-weight: 700; }
+  .preiscritti td { color: var(--secondary); }
+  .preiscritti tbody tr:last-child td { border-bottom: 0; }
+  .preiscritti caption {
+    caption-side: bottom;
+    margin-top: 0.5rem;
+    color: var(--tertiary);
+    font-size: 0.85em;
+    text-align: right;
+  }
+</style>
+
+<script>
+(function () {
+  var el = document.getElementById("{{ $id }}");
+  if (!el) return;
+  var url = el.getAttribute("data-csv");
+  var columns = el.getAttribute("data-columns").split(",").map(function (c) {
+    return c.trim();
+  });
+  var msg = {
+    unavailable: el.getAttribute("data-msg-unavailable"),
+    empty: el.getAttribute("data-msg-empty"),
+    count: el.getAttribute("data-msg-count"),
+    error: el.getAttribute("data-msg-error")
+  };
+
+  function setStatus(msg) {
+    el.innerHTML = '<p class="preiscritti__status">' + msg + "</p>";
+  }
+
+  // Se l'URL non è stato configurato, mostra un avviso ed esci.
+  if (!url || url.indexOf("GOOGLE_SHEET_CSV_URL") !== -1) {
+    setStatus(msg.unavailable);
+    return;
+  }
+
+  // Mini-parser CSV: gestisce campi tra virgolette, virgole e a-capo interni.
+  function parseCSV(text) {
+    var rows = [], row = [], field = "", inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i], next = text[i + 1];
+      if (inQuotes) {
+        if (ch === '"' && next === '"') { field += '"'; i++; }
+        else if (ch === '"') { inQuotes = false; }
+        else { field += ch; }
+      } else if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ",") {
+        row.push(field); field = "";
+      } else if (ch === "\n") {
+        row.push(field); rows.push(row); row = []; field = "";
+      } else if (ch === "\r") {
+        // ignora: i terminatori \r\n vengono gestiti dal \n
+      } else {
+        field += ch;
+      }
+    }
+    if (field !== "" || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function escapeHTML(s) {
+    return String(s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  fetch(url)
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(function (text) {
+      var rows = parseCSV(text).filter(function (r) {
+        return r.some(function (c) { return c.trim() !== ""; });
+      });
+      if (!rows.length) { setStatus(msg.empty); return; }
+
+      var header = rows[0].map(function (h) { return h.trim(); });
+      // Indice di ogni colonna richiesta (per nome di intestazione).
+      var idx = columns.map(function (c) { return header.indexOf(c); });
+
+      var html = '<table><thead><tr>';
+      columns.forEach(function (c) { html += "<th>" + escapeHTML(c) + "</th>"; });
+      html += "</tr></thead><tbody>";
+
+      var count = 0;
+      for (var i = 1; i < rows.length; i++) {
+        var r = rows[i];
+        html += "<tr>";
+        idx.forEach(function (j) {
+          html += "<td>" + escapeHTML(j >= 0 && r[j] ? r[j].trim() : "") + "</td>";
+        });
+        html += "</tr>";
+        count++;
+      }
+      html += "</tbody><caption>" + count + " " + msg.count + "</caption></table>";
+
+      if (!count) { setStatus(msg.empty); return; }
+      el.innerHTML = html;
+    })
+    .catch(function () {
+      setStatus(msg.error);
+    });
+})();
+</script>

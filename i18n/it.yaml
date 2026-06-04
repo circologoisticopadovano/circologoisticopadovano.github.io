@@ -1,0 +1,12 @@
+# Stringhe del progetto (si fondono con quelle del tema PaperMod).
+# Usate dallo shortcode "preiscritti".
+preiscritti_loading:
+  other: "Caricamento della lista in corso…"
+preiscritti_unavailable:
+  other: "Lista non ancora disponibile."
+preiscritti_empty:
+  other: "Ancora nessun pre-iscritto."
+preiscritti_count:
+  other: "pre-iscritti"
+preiscritti_error:
+  other: "Impossibile caricare la lista al momento. Riprova più tardi."
