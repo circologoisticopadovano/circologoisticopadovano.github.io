@@ -1,0 +1,12 @@
+{{- /* Mostra lo stemma del Circolo (asset SVG) a dimensione piena.
+       Uso:  {{< stemma >}}  oppure  {{< stemma max="420" >}}  */ -}}
+{{- $img := resources.Get "images/stemma.svg" -}}
+{{- $max := .Get "max" | default "680" -}}
+{{- if $img -}}
+<figure class="stemma-figure">
+  <img src="{{ $img.RelPermalink }}" alt="Stemma del Circolo Goistico Padovano"
+       style="max-width:{{ $max }}px;width:100%;height:auto" loading="lazy">
+</figure>
+{{- else -}}
+<p><em>Stemma non trovato (assets/images/stemma.svg).</em></p>
+{{- end -}}

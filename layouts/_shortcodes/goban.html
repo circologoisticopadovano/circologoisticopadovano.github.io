@@ -1,0 +1,46 @@
+{{- /* Diagramma di Go da una griglia ASCII.
+       Uso:
+         {{< goban caption="..." >}}
+         . X O .
+         . X O .
+         {{< /goban >}}
+       Caratteri: X/x = pietra nera, O/o = pietra bianca, . o - = vuoto,
+       + = punto hoshi, qualunque altro singolo carattere = etichetta. */ -}}
+{{- $step := 30 -}}
+{{- $pad := 16 -}}
+{{- $lines := slice -}}
+{{- range (split (.Inner | chomp) "\n") -}}
+  {{- $t := trim . " \t\r" -}}
+  {{- if ne $t "" -}}{{- $lines = $lines | append $t -}}{{- end -}}
+{{- end -}}
+{{- $rows := len $lines -}}
+{{- $cols := 0 -}}
+{{- range $lines -}}{{- $n := len (split . "") -}}{{- if gt $n $cols -}}{{- $cols = $n -}}{{- end -}}{{- end -}}
+{{- $w := add (mul (sub $cols 1) $step) (mul $pad 2) -}}
+{{- $h := add (mul (sub $rows 1) $step) (mul $pad 2) -}}
+{{- $x1 := sub $w $pad -}}
+{{- $y1 := sub $h $pad -}}
+<figure class="goban-fig">
+<svg viewBox="0 0 {{ $w }} {{ $h }}" width="{{ $w }}" height="{{ $h }}" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="{{ sub $w 1 }}" height="{{ sub $h 1 }}" rx="4" fill="#e8c889" stroke="#c9a468" stroke-width="1"/>
+{{- range $i := seq 0 (sub $rows 1) }}{{ $y := add $pad (mul $i $step) }}
+<line x1="{{ $pad }}" y1="{{ $y }}" x2="{{ $x1 }}" y2="{{ $y }}" stroke="#5a3d22" stroke-width="1.1"/>{{ end }}
+{{- range $j := seq 0 (sub $cols 1) }}{{ $x := add $pad (mul $j $step) }}
+<line x1="{{ $x }}" y1="{{ $pad }}" x2="{{ $x }}" y2="{{ $y1 }}" stroke="#5a3d22" stroke-width="1.1"/>{{ end }}
+{{- range $i, $line := $lines }}{{ $y := add $pad (mul $i $step) }}
+{{- range $j, $ch := (split $line "") }}{{ $x := add $pad (mul $j $step) }}
+{{- if or (eq $ch "X") (eq $ch "x") }}
+<circle cx="{{ $x }}" cy="{{ $y }}" r="13" fill="#161616"/><ellipse cx="{{ sub $x 4 }}" cy="{{ sub $y 4 }}" rx="4" ry="2.6" fill="#ffffff" opacity="0.22"/>
+{{- else if or (eq $ch "O") (eq $ch "o") }}
+<circle cx="{{ $x }}" cy="{{ $y }}" r="13" fill="#f7f7f2" stroke="#b3ae9f" stroke-width="0.8"/><ellipse cx="{{ sub $x 4 }}" cy="{{ sub $y 4 }}" rx="4.2" ry="2.8" fill="#ffffff" opacity="0.9"/>
+{{- else if eq $ch "+" }}
+<circle cx="{{ $x }}" cy="{{ $y }}" r="2.4" fill="#5a3d22"/>
+{{- else if or (eq $ch ".") (eq $ch "-") }}
+{{- else }}
+<circle cx="{{ $x }}" cy="{{ $y }}" r="11" fill="#e8c889"/><text x="{{ $x }}" y="{{ $y }}" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="600" fill="#3a2a16">{{ $ch }}</text>
+{{- end }}
+{{- end }}
+{{- end }}
+</svg>
+{{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

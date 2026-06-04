@@ -4,18 +4,25 @@ slug: "about"
 date: 2026-06-04
 ---
 
+{{< stemma max="480" >}}
+
+Our coat of arms lays a game of Go beneath Giotto's starry vault: the sky of Padua
+and the playing board in a single field. [Discover its symbolism →](/en/emblem/)
+
 The **Circolo Goistico Padovano** brings together the people in Padua who share a passion for
 **Go**, the oldest and most fascinating board game of strategy in the world.
 
 ## Our story
 
-We are a group of enthusiasts who meet regularly to play, study and spread Go. The
-club was born from the desire to create a stable point of reference for Go players
-in the Padua area, and to offer the curious a welcoming place to take their first
-steps.
+The **Circolo Goistico Padovano** is a stable meeting point for the game of Go in
+Padua and the Veneto. It was born from the meeting of two enthusiasts and a shared
+wish: to give the region a fixed place to sit down at a goban. Once a **public
+venue** had been found in the city, the **first meeting** was held on **12 March
+2025**.
 
-> _This section is a draft: tell us the story, the founding year and the main
-> milestones of the club._
+Since then the club has been a **steady presence** in the Padua area: an outpost of
+Go with regular gatherings, open to anyone who wants to play, study, or simply give
+it a first try.
 
 ## What we offer
 

@@ -1,12 +1,12 @@
 ---
-title: "Torneo di Go a Padova 2026 — pre-iscrizioni aperte"
+title: "1° Torneo Padovano — pre-iscrizioni aperte"
 date: 2026-06-04
 draft: false
 summary: "Il Circolo Goistico Padovano organizza un torneo di Go il 3 ottobre 2026 al Centro Parrocchiale San Carlo Borromeo. Pre-iscrizioni aperte!"
 tags: ["tornei", "annunci"]
 ---
 
-Il **Circolo Goistico Padovano** è lieto di annunciare il suo torneo di Go! 🏆⚫⚪
+Il **Circolo Goistico Padovano** è lieto di annunciare il **1° Torneo Padovano**! 🏆⚫⚪
 
 Una giornata dedicata al gioco del Go, aperta a giocatori di ogni livello — dai
 principianti ai più esperti. Vi aspettiamo numerosi sul goban!
