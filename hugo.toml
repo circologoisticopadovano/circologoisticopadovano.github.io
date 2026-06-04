@@ -36,6 +36,11 @@ buildExpired = false
   ShowToc = true
   TocOpen = false
 
+  # Logo del sito (proposta stemma con partita di Go montata sulla volta)
+  [params.label]
+    icon = "images/logo.svg"
+    iconHeight = 120
+
   # Pulsanti social opzionali in home (rimuovi/aggiungi a piacere)
   [[params.socialIcons]]
     name = "telegram"
@@ -55,8 +60,15 @@ buildExpired = false
     [languages.it.params]
       description = "Circolo Goistico Padovano — il club del gioco del Go a Padova"
       [languages.it.params.homeInfoParams]
-        Title = "Circolo Goistico Padovano ⚫⚪"
+        Title = "Circolo Goistico Padovano"
         Content = "Il club del **gioco del Go** a Padova. Ci ritroviamo per giocare, imparare e diffondere questo antico gioco di strategia. Principianti benvenuti!"
+
+      # Striscia annuncio in cima a ogni pagina. Per spegnerla: enable = false
+      [languages.it.params.announcement]
+        enable = true
+        text = "🏆 1° Torneo Padovano — sabato 3 ottobre 2026 · pre-iscrizioni aperte"
+        url = "/it/news/torneo-padova-2026/"
+        cta = "Scopri di più"
 
     [languages.it.menu]
       [[languages.it.menu.main]]
@@ -65,13 +77,18 @@ buildExpired = false
         url = "/chi-siamo/"
         weight = 10
       [[languages.it.menu.main]]
+        identifier = "lo-stemma"
+        name = "Lo stemma"
+        url = "/lo-stemma/"
+        weight = 35
+      [[languages.it.menu.main]]
         identifier = "news"
         name = "News & Eventi"
         url = "/news/"
         weight = 20
       [[languages.it.menu.main]]
         identifier = "come-giocare"
-        name = "Come giocare a Go"
+        name = "Introduzione al Go"
         url = "/come-giocare/"
         weight = 30
       [[languages.it.menu.main]]
@@ -90,8 +107,15 @@ buildExpired = false
     [languages.en.params]
       description = "Circolo Goistico Padovano — the home of the game of Go in Padua, Italy"
       [languages.en.params.homeInfoParams]
-        Title = "Circolo Goistico Padovano ⚫⚪"
+        Title = "Circolo Goistico Padovano"
         Content = "The home of the **game of Go** in Padua. We meet to play, learn and share this ancient game of strategy. Beginners welcome!"
+
+      # Top announcement bar on every page. To switch off: enable = false
+      [languages.en.params.announcement]
+        enable = true
+        text = "🏆 1st Padua Tournament — Saturday 3 October 2026 · pre-registration open"
+        url = "/en/news/torneo-padova-2026/"
+        cta = "Learn more"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
@@ -100,13 +124,18 @@ buildExpired = false
         url = "/about/"
         weight = 10
       [[languages.en.menu.main]]
+        identifier = "emblem"
+        name = "Emblem"
+        url = "/emblem/"
+        weight = 35
+      [[languages.en.menu.main]]
         identifier = "news"
         name = "News & Events"
         url = "/news/"
         weight = 20
       [[languages.en.menu.main]]
         identifier = "how-to-play"
-        name = "How to play Go"
+        name = "Introduction to Go"
         url = "/how-to-play/"
         weight = 30
       [[languages.en.menu.main]]

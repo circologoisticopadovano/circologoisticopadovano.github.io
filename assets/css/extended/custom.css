@@ -10,37 +10,40 @@
 :root {
     --heading-font: "Fraunces", Georgia, "Times New Roman", serif;
 
-    /* Legno / carta (chiaro) */
-    --theme: #f4ecda;
-    --entry: #fbf7ee;
-    --primary: #2b2118;
-    --secondary: #7a6a55;
-    --tertiary: #d8c39a;
-    --content: #3a2f24;
-    --border: #e0d0aa;
+    /* Giorno: avorio caldo e luminoso (la luce dell'oro della volta),
+       con blu lapislazzuli e oro come accenti. Elegante ma accogliente. */
+    --theme: #f6f0e3;
+    --entry: #fffdf7;
+    --primary: #18263f;
+    --secondary: #786c57;
+    --tertiary: #e7d9bb;
+    --content: #2c3142;
+    --border: #e8dcc4;
 
-    --accent: #8a5a2b;
-    --accent-strong: #6f4720;
-    --goban-line: rgba(120, 90, 50, .16);
-    --stone-black: #2b2118;
-    --card-shadow: 0 1px 2px rgba(60, 40, 15, .06), 0 6px 18px rgba(60, 40, 15, .07);
-    --card-shadow-hover: 0 2px 4px rgba(60, 40, 15, .08), 0 14px 30px rgba(60, 40, 15, .14);
+    --gold: #b8902f;
+    --accent: #1c4f95;
+    --accent-strong: #143a72;
+    --goban-line: rgba(184, 144, 47, .20);
+    --stone-black: #18263f;
+    --card-shadow: 0 1px 2px rgba(90, 66, 20, .07), 0 6px 18px rgba(90, 66, 20, .09);
+    --card-shadow-hover: 0 2px 4px rgba(90, 66, 20, .10), 0 14px 30px rgba(90, 66, 20, .16);
 }
 
 :root[data-theme="dark"] {
-    /* Lacca notturna (scuro) */
-    --theme: #1c1814;
-    --entry: #262019;
-    --primary: #ece3d2;
-    --secondary: #a3927a;
-    --tertiary: #3a322a;
-    --content: #d8ccb8;
-    --border: #3a322a;
+    /* Volta notturna degli Scrovegni (scuro) */
+    --theme: #0b1730;
+    --entry: #122145;
+    --primary: #eaf0fb;
+    --secondary: #9aacce;
+    --tertiary: #21345d;
+    --content: #d4ddef;
+    --border: #233a64;
 
-    --accent: #caa46a;
-    --accent-strong: #ddbd8a;
-    --goban-line: rgba(200, 164, 106, .14);
-    --stone-black: #0e0b08;
+    --gold: #d8b75a;
+    --accent: #7aa6e0;
+    --accent-strong: #a6c4ee;
+    --goban-line: rgba(216, 183, 90, .13);
+    --stone-black: #060c1c;
     --card-shadow: 0 1px 2px rgba(0, 0, 0, .25), 0 6px 18px rgba(0, 0, 0, .30);
     --card-shadow-hover: 0 2px 4px rgba(0, 0, 0, .30), 0 14px 30px rgba(0, 0, 0, .45);
 }
@@ -95,6 +98,42 @@ h1, h2, h3, h4,
     background: var(--accent);
 }
 
+/* --------------------- b2) Striscia annuncio (torneo) ------------------- */
+
+.announce {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem .9rem;
+    align-items: center;
+    justify-content: center;
+    padding: .6rem 1.1rem;
+    background: linear-gradient(180deg, #dbb551 0%, #c49a31 100%);
+    color: #16243f;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid #a8771f;
+}
+
+.announce:hover {
+    background: linear-gradient(180deg, #e3c062 0%, #caa23e 100%);
+    color: #0e1c3a;
+}
+
+.announce-cta {
+    white-space: nowrap;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(22, 36, 63, .5);
+}
+
+.announce:hover .announce-cta {
+    text-decoration-color: #0e1c3a;
+}
+
 /* ------------------------------ c) Header ------------------------------- */
 
 .header {
@@ -102,14 +141,48 @@ h1, h2, h3, h4,
     background: color-mix(in srgb, var(--theme) 88%, transparent);
 }
 
-.nav .logo a {
+.header-nav .logo a {
     font-family: var(--heading-font);
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
+/* Logo "ampio e generoso": la barra cresce col marchio e gli lascia aria */
+.header-nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-nav .logo a img {
+    margin: 2px 6px 2px 0;
+}
+
+/* Menu centrato nella barra (desktop): logo a sinistra, interruttori a destra
+   (vedi header.html), il menu si centra in assoluto senza sovrapporsi. */
+@media (min-width: 1000px) {
+    .header-nav {
+        position: relative;
+    }
+
+    #menu {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+}
+
 #menu a {
+    font-family: var(--heading-font);
+    font-size: 1.08rem;
+    font-weight: 500;
+    letter-spacing: .005em;
     transition: color .15s ease;
+}
+
+#menu li {
+    margin-inline: 0.55rem;
 }
 
 #menu a:hover {
@@ -123,51 +196,40 @@ h1, h2, h3, h4,
 
 /* ---------------------- d) Hero (home-info / goban) --------------------- */
 
+/* Stemma come centro dell'hero della home: ampio e centrato */
+.hero-stemma {
+    margin: 0.2rem auto 1.4rem;
+    text-align: center;
+}
+
+.hero-stemma img {
+    display: block;
+    margin: 0 auto;
+    width: 640px;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .45));
+}
+
 .first-entry.home-info {
     position: relative;
     overflow: hidden;
     min-height: auto;
-    padding: 2.4rem 2.2rem;
+    padding: 1.6rem 1.3rem;
+    text-align: center;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background-color: var(--entry);
-    /* Motivo goban: griglia tenue */
-    background-image:
-        repeating-linear-gradient(0deg, var(--goban-line) 0 1px, transparent 1px 44px),
-        repeating-linear-gradient(90deg, var(--goban-line) 0 1px, transparent 1px 44px);
-    background-position: -1px -1px;
+    /* Volta stellata: le stelle a 8 punte dello stemma, reticolo a rombo */
+    background-image: url('/images/hero-stars.svg');
+    background-repeat: repeat;
+    background-position: center top;
     box-shadow: var(--card-shadow);
 }
 
 .first-entry.home-info .entry-header h1 {
     font-size: 2.4rem;
     margin-bottom: .4rem;
-}
-
-/* Punti hoshi negli incroci della griglia */
-.first-entry.home-info::before,
-.first-entry.home-info::after {
-    content: "";
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: .55;
-    pointer-events: none;
-}
-
-.first-entry.home-info::before {
-    top: calc(44px - 3.5px - 1px);
-    left: calc(44px - 3.5px - 1px);
-    box-shadow:
-        176px 0 0 var(--accent),
-        0 176px 0 var(--accent);
-}
-
-.first-entry.home-info::after {
-    top: calc(44px - 3.5px - 1px);
-    right: calc(44px - 3.5px - 1px);
 }
 
 /* -------------- e) Elenchi: marker "hoshi" (punto goban) ---------------- */
@@ -271,6 +333,68 @@ h1, h2, h3, h4,
     color: var(--accent);
 }
 
+/* ----------------------- i) Pagina "Lo stemma" -------------------------- */
+/* Lo stemma è già un campo blu con cornice d'oro: niente contenitore esterno,
+   solo centratura e un'ombra morbida che lo stacca dalla pagina. */
+.stemma-figure {
+    margin: 0.5rem auto 1.8rem;
+    text-align: center;
+}
+
+.stemma-figure img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    filter: drop-shadow(0 10px 30px rgba(14, 30, 70, .28));
+}
+
+:root[data-theme="dark"] .stemma-figure img {
+    filter: drop-shadow(0 12px 34px rgba(0, 0, 0, .6));
+}
+
+/* ------------- MODALITÀ NOTTE: più doratura (volta stellata) ------------- */
+/* Di notte i titoli si fanno oro, la barra prende un filo di luce dorata e il
+   menu attivo brilla d'oro: il sito diventa una volta degli Scrovegni. */
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] .post-title,
+:root[data-theme="dark"] .page-header h1,
+:root[data-theme="dark"] .first-entry.home-info .entry-header h1 {
+    color: var(--gold);
+}
+
+:root[data-theme="dark"] .post-content h2::after,
+:root[data-theme="dark"] .post-single .post-content h2::after {
+    background: var(--gold);
+}
+
+:root[data-theme="dark"] .header {
+    border-bottom-color: color-mix(in srgb, var(--gold) 40%, var(--border));
+    box-shadow: inset 0 2px 0 0 color-mix(in srgb, var(--gold) 22%, transparent);
+}
+
+:root[data-theme="dark"] #menu a:hover,
+:root[data-theme="dark"] #menu .active {
+    color: var(--gold);
+}
+
+:root[data-theme="dark"] #menu .active {
+    border-bottom-color: var(--gold);
+}
+
+:root[data-theme="dark"] .post-content a,
+:root[data-theme="dark"] .entry-content a,
+:root[data-theme="dark"] .first-entry.home-info a {
+    text-decoration-color: color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+:root[data-theme="dark"] .footer a:hover,
+:root[data-theme="dark"] .social-icons a:hover svg {
+    color: var(--gold);
+}
+
 /* ------------------------------ Responsive ------------------------------ */
 
 @media (max-width: 600px) {
@@ -281,4 +405,33 @@ h1, h2, h3, h4,
     .first-entry.home-info .entry-header h1 {
         font-size: 1.9rem;
     }
+}
+
+/* ----------- TEMA BLU: fregi e punti "hoshi" in oro sul blu ------------- */
+/* I link e il menu restano blu lapislazzuli (--accent); i dettagli decorativi
+   — punti del goban, righello dei titoli, bordo delle card — diventano oro,
+   come le stelle della volta. */
+
+.first-entry.home-info::before {
+    background: var(--gold);
+    box-shadow: 176px 0 0 var(--gold), 0 176px 0 var(--gold);
+}
+
+.first-entry.home-info::after {
+    background: var(--gold);
+}
+
+.post-content.md-content ul li::before,
+.entry-content.md-content ul li::before {
+    background: var(--gold);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+
+.post-content h2::after,
+.post-single .post-content h2::after {
+    background: var(--gold);
+}
+
+.post-entry {
+    border-left-color: var(--gold);
 }

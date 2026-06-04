@@ -3,19 +3,26 @@ title: "Chi siamo"
 date: 2026-06-04
 ---
 
+{{< stemma max="480" >}}
+
+Il nostro stemma posa una partita di Go sotto la volta stellata di Giotto: il
+cielo di Padova e il goban in un solo campo. [Scopri la sua simbologia →](/it/lo-stemma/)
+
 Il **Circolo Goistico Padovano** riunisce le persone che a Padova condividono la
 passione per il **Go**, il gioco di strategia da tavolo più antico e affascinante
 del mondo.
 
 ## La nostra storia
 
-Siamo un gruppo di appassionati che si ritrova regolarmente per giocare,
-studiare e far conoscere il Go. Il circolo nasce dal desiderio di creare un punto
-di riferimento stabile per i goisti del territorio padovano e di offrire a chi è
-curioso un luogo accogliente dove muovere i primi passi.
+Il **Circolo Goistico Padovano** è un punto di ritrovo stabile per il gioco del Go a
+Padova e nel Veneto. Nasce dall'incontro di due appassionati e dal desiderio
+condiviso di dare alla regione un luogo fisso dove sedersi davanti a un goban.
+Individuata una **sede pubblica** in città, il **primo ritrovo** si è tenuto il
+**12 marzo 2025**.
 
-> _Questa sezione è una bozza: raccontaci la storia, l'anno di fondazione e le
-> tappe principali del circolo._
+Da allora il Circolo è una **presenza fissa** sul territorio padovano: un presidio
+del Go con appuntamenti regolari, aperto a chi vuole giocare, studiare o
+semplicemente provare per la prima volta.
 
 ## Cosa offriamo
 

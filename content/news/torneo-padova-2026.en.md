@@ -1,12 +1,12 @@
 ---
-title: "Go Tournament in Padua 2026 — pre-registration open"
+title: "1st Padua Tournament — pre-registration open"
 date: 2026-06-04
 draft: false
 summary: "The Circolo Goistico Padovano is organising a Go tournament on 3 October 2026 at the Centro Parrocchiale San Carlo Borromeo. Pre-registration is open!"
 tags: ["tournaments", "announcements"]
 ---
 
-The **Circolo Goistico Padovano** is delighted to announce its Go tournament! 🏆⚫⚪
+The **Circolo Goistico Padovano** is delighted to announce the **1st Padua Tournament**! 🏆⚫⚪
 
 A day dedicated to the game of Go, open to players of every level — from beginners
 to the most experienced. We look forward to seeing many of you at the goban!

@@ -1,0 +1,22 @@
+{{- /* Override del partial PaperMod: aggiunge lo stemma come centro dell'hero.
+       Lo stemma sostituisce le pietre-emoji nel titolo; l'identità è affidata
+       al marchio, presentato in modo ampio e generoso. */ -}}
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    {{- with resources.Get "images/stemma.svg" }}
+    <figure class="hero-stemma">
+        <img src="{{ .RelPermalink }}" alt="{{ $.Site.Title }}" loading="eager">
+    </figure>
+    {{- end }}
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- end -}}
